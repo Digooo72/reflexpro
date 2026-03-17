@@ -1,0 +1,35 @@
+query AllGames @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  games {
+    id
+    name
+    description
+    difficultyLevel
+  }
+}
+
+query UserScores($userId: UUID!) @auth(level: USER, insecureReason: "This operation is safe to expose to all logged in users.") {
+  scores(where: {userId: {eq: $userId}}) {
+    id
+    game {
+      name
+    }
+    scoreValue
+    playedAt
+  }
+}
+
+mutation RecordScore($gameId: UUID!, $scoreValue: Int!) @auth(level: USER) {
+  score_insert(data: {
+    gameId: $gameId,
+    scoreValue: $scoreValue,
+    userId_expr: "auth.uid",
+    playedAt_expr: "request.time"
+  })
+}
+
+mutation UpdateUserProfile($avatarUrl: String, $username: String) @auth(level: USER) {
+  user_update(key: {id_expr: "auth.uid"}, data: {
+    avatarUrl: $avatarUrl,
+    username: $username
+  })
+}

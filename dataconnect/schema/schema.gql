@@ -1,0 +1,44 @@
+type User @table {
+  username: String!
+  email: String!
+  createdAt: Timestamp!
+  avatarUrl: String
+  lastLogin: Timestamp
+}
+
+type Game @table {
+  name: String!
+  description: String!
+  createdAt: Timestamp!
+  instructions: String
+  difficultyLevel: String
+}
+
+type Score @table {
+  user: User
+  game: Game
+  scoreValue: Int!
+  playedAt: Timestamp!
+  reactionTimeDetails: String
+}
+
+type LeaderboardEntry @table {
+  user: User
+  game: Game
+  scoreValue: Int!
+  rank: Int!
+  recordedAt: Timestamp!
+}
+
+type Achievement @table {
+  name: String!
+  description: String!
+  iconUrl: String!
+  threshold: Int
+}
+
+type UserAchievement @table {
+  user: User
+  achievement: Achievement
+  unlockedAt: Timestamp!
+}

@@ -1,0 +1,58 @@
+:root {
+    /* Színek - Modern E-sport / Sötét Téma */
+    --color-primary: #00e5ff;    /* Neon Cián */
+    --color-secondary: #00ff88;  /* Neon Zöld (Start!) */
+    --color-accent: #ff0055;     /* Neon Pink/Piros (Várj / Hiba) */
+
+    --color-bg: #0b0f19;         /* Nagyon sötét űrkék háttér */
+    --color-surface: rgba(30, 41, 59, 0.6); /* Félig átlátszó "üveg" felület */
+
+    --color-text: #f8fafc;       /* Hófehér szöveg */
+    --color-text-muted: #94a3b8; /* Szürkés másodlagos szöveg */
+
+    --color-navbar: rgba(11, 15, 25, 0.8);
+    --color-mobile-menu: rgba(11, 15, 25, 0.95);
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-funfact-bg: rgba(11, 15, 25, 0.4);
+
+    /* Térközök (4px-es skála) */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 32px;
+    --space-6: 48px;
+
+    /* Reszponzív Tipográfia (clamp) */
+    --font-sm: clamp(0.8rem, 1vw, 0.9rem);
+    --font-md: clamp(1rem, 1.2vw, 1.125rem);
+    --font-lg: clamp(1.25rem, 2vw, 1.5rem);
+    --font-xl: clamp(2rem, 4vw, 3rem); /* Hatalmas, drámai címsorok */
+
+    /* Kerekítések */
+    --radius: 12px;
+    --radius-full: 9999px;
+
+    /* Árnyékok és Ragyogások (Glow) */
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --glow-primary: 0 0 15px rgba(0, 229, 255, 0.4);
+    --glow-secondary: 0 0 30px rgba(0, 255, 136, 0.5);
+    --glow-accent: 0 0 30px rgba(255, 0, 85, 0.5);
+}
+
+/* --- VILÁGOS MÓD (LIGHT THEME) FELÜLÍRÁSOK --- */
+[data-theme="light"] {
+    --color-bg: #f8fafc;
+    --color-surface: rgba(255, 255, 255, 0.85);
+    --color-text: #0f172a;
+    --color-text-muted: #475569;
+    --color-primary: #009eb3;
+    --color-secondary: #00b35f;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    /* --- ÚJ VILÁGOS VÁLTOZÓK --- */
+    --color-navbar: rgba(255, 255, 255, 0.85);
+    --color-mobile-menu: rgba(248, 250, 252, 0.95);
+    --color-border: rgba(0, 0, 0, 0.08);
+    --color-funfact-bg: rgba(255, 255, 255, 0.6);
+}

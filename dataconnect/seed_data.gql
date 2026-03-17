@@ -1,0 +1,108 @@
+mutation CreateDemoData @transaction @auth(level: PUBLIC, insecureReason: "Populating the database with seed data is safe to expose to the public.") {
+  user_insertMany(data: [
+    {
+      id: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      username: "playerOne",
+      email: "player1@example.com",
+      createdAt: "2024-01-01T10:00:00Z"
+    },
+    {
+      id: "b1c2d3e4-f5a6-8901-2345-67890abcdef0",
+      username: "playerTwo",
+      email: "player2@example.com",
+      createdAt: "2024-01-01T10:05:00Z"
+    }
+  ])
+  game_insertMany(data: [
+    {
+      id: "c1d2e3f4-a5b6-9012-3456-7890abcdef12",
+      name: "Reaction Reflex",
+      description: "Test your reaction time!",
+      instructions: "Click the target as soon as it appears.",
+      difficultyLevel: "Easy",
+      createdAt: "2024-01-01T11:00:00Z"
+    },
+    {
+      id: "d1e2f3a4-b5c6-0123-4567-890abcdef123",
+      name: "Memory Match",
+      description: "Challenge your memory skills.",
+      instructions: "Flip cards to find matching pairs.",
+      difficultyLevel: "Medium",
+      createdAt: "2024-01-01T11:10:00Z"
+    }
+  ])
+  score_insertMany(data: [
+    {
+      userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      gameId: "c1d2e3f4-a5b6-9012-3456-7890abcdef12",
+      scoreValue: 150,
+      playedAt: "2024-01-01T12:00:00Z",
+      reactionTimeDetails: "Fast and accurate"
+    },
+    {
+      userId: "b1c2d3e4-f5a6-8901-2345-67890abcdef0",
+      gameId: "c1d2e3f4-a5b6-9012-3456-7890abcdef12",
+      scoreValue: 120,
+      playedAt: "2024-01-01T12:05:00Z",
+      reactionTimeDetails: "Good, but some hesitation"
+    },
+    {
+      userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      gameId: "d1e2f3a4-b5c6-0123-4567-890abcdef123",
+      scoreValue: 800,
+      playedAt: "2024-01-01T12:15:00Z",
+      reactionTimeDetails: "Excellent memory!"
+    }
+  ])
+  leaderboardEntry_insertMany(data: [
+    {
+      userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      gameId: "c1d2e3f4-a5b6-9012-3456-7890abcdef12",
+      scoreValue: 150,
+      rank: 1,
+      recordedAt: "2024-01-01T12:00:00Z"
+    },
+    {
+      userId: "b1c2d3e4-f5a6-8901-2345-67890abcdef0",
+      gameId: "c1d2e3f4-a5b6-9012-3456-7890abcdef12",
+      scoreValue: 120,
+      rank: 2,
+      recordedAt: "2024-01-01T12:05:00Z"
+    },
+    {
+      userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      gameId: "d1e2f3a4-b5c6-0123-4567-890abcdef123",
+      scoreValue: 800,
+      rank: 1,
+      recordedAt: "2024-01-01T12:15:00Z"
+    }
+  ])
+  achievement_insertMany(data: [
+    {
+      id: "e1f2a3b4-c5d6-7890-1234-567890abcdef",
+      name: "First Game",
+      description: "Played your first game.",
+      iconUrl: "https://example.com/first_game.png",
+      threshold: 1
+    },
+    {
+      id: "f1a2b3c4-d5e6-8901-2345-67890abcdef0",
+      name: "Speed Demon",
+      description: "Achieved a high score in Reaction Reflex.",
+      iconUrl: "https://example.com/speed_demon.png",
+      threshold: 100
+    }
+  ])
+  userAchievement_insertMany(data: [
+    {
+      userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      achievementId: "e1f2a3b4-c5d6-7890-1234-567890abcdef",
+      unlockedAt: "2024-01-01T12:00:00Z"
+    },
+    {
+      userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      achievementId: "f1a2b3c4-d5e6-8901-2345-67890abcdef0",
+      unlockedAt: "2024-01-01T12:00:00Z"
+    }
+  ])
+}

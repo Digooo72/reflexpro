@@ -1,0 +1,219 @@
+@import "./tokens.css";
+
+:root {
+    --ambient-color-1: rgba(139, 92, 246, 0.4); /* Alap Lila */
+    --ambient-color-2: rgba(0, 229, 255, 0.4);  /* Alap Cián */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg);
+    /* Látványos sötét háttérátmenet */
+    background-image: radial-gradient(circle at top right, rgba(0, 229, 255, 0.05), transparent 40%),
+    radial-gradient(circle at bottom left, rgba(255, 0, 85, 0.05), transparent 40%);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-4);
+}
+
+/* Skip link (Akadálymentesítés) */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    color: var(--color-bg);
+    padding: var(--space-2) var(--space-4);
+    z-index: 1000;
+    text-decoration: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    font-weight: bold;
+    transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+h1 { font-size: var(--font-xl); margin-bottom: var(--space-4); letter-spacing: -1px; }
+h2 { font-size: var(--font-lg); margin-bottom: var(--space-3); }
+
+/* Gombok alapértelmezett formázása (min 44x44px a touch-friendly UX-hez) */
+button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: var(--font-md);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+button:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: var(--glow-primary);
+    transform: translateY(-2px);
+}
+button:active { transform: translateY(1px); }
+
+/* Inputok űrlapokhoz */
+input {
+    min-height: 44px;
+    padding: var(--space-3);
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius);
+    color: var(--color-text);
+    font-size: var(--font-md);
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+/* Akadálymentes fókusz */
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 4px;
+}
+
+/* Reszponzív Grid (3 töréspont) */
+.grid { display: grid; gap: var(--space-4); }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* Neon pulzáló animáció a játékgombhoz */
+@keyframes pulseDanger {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 85, 0.4); }
+    70% { box-shadow: 0 0 0 30px rgba(255, 0, 85, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 85, 0); }
+}
+
+/* --- FŐOLDAL AMBIENT HÁTTÉR ANIMÁCIÓ --- */
+@keyframes floatAmbient {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    33% { transform: translate(3%, 5%) scale(1.1); opacity: 0.6; }
+    66% { transform: translate(-2%, 3%) scale(0.95); opacity: 0.5; }
+    100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+}
+
+.home-ambient-bg {
+    position: fixed;
+    top: -10%;
+    left: -10%;
+    width: 120vw;
+    height: 120vh;
+    /* ÚJ: Dinamikus CSS változókat használunk */
+    background:
+            radial-gradient(circle at 30% 40%, var(--ambient-color-1), transparent 25%),
+            radial-gradient(circle at 70% 60%, var(--ambient-color-2), transparent 25%);
+    z-index: -1;
+    pointer-events: none;
+    animation: floatAmbient 12s ease-in-out infinite;
+    /* ÚJ: Lágy átmenet színváltáskor */
+    transition: background 0.8s ease-in-out;
+}
+
+
+/* --- JÁTÉK AMBIENT HÁTTÉR --- */
+.game-ambient-bg {
+    position: fixed;
+    top: -10%;
+    left: -10%;
+    width: 120vw;
+    height: 120vh;
+    z-index: -1;
+    pointer-events: none;
+    animation: floatAmbient 12s ease-in-out infinite;
+    /* Ez a sor felel a lágy átmenetért, amikor színt vált a háttér: */
+    transition: background 0.4s ease-out;
+}
+
+/* --- SZÖVEG BEÚSZÓ ANIMÁCIÓ --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* --- JÁTÉK KÉPERNYŐ GÖRGÉS LETILTÁSA MOBILON --- */
+body.no-scroll {
+    overflow: hidden;
+    touch-action: none; /* Letiltja a nagyítást és a tapintásos gesztusokat */
+    overscroll-behavior: none; /* Letiltja a "lehúzásra frissítés" (pull-to-refresh) funkciót */
+}
+
+/* --- BURGER MENÜ RESZPONZÍV STÍLUSAI --- */
+.desktop-menu {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.mobile-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: var(--font-xl);
+    cursor: pointer;
+    box-shadow: none;
+    padding: 0 var(--space-2);
+    min-width: auto;
+    min-height: auto;
+}
+
+.mobile-toggle:hover {
+    background: transparent;
+    box-shadow: none;
+    color: var(--color-primary);
+    transform: none;
+}
+
+.mobile-menu-overlay {
+    display: none;
+}
+
+/* 768px alatt (mobil és kisebb tabletek) átváltunk Burger menüre */
+@media (max-width: 768px) {
+    .desktop-menu {
+        display: none; /* Elrejtjük a nagy menüt */
+    }
+    .mobile-toggle {
+        display: block; /* Megmutatjuk a ☰ gombot */
+    }
+    .mobile-menu-overlay.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-mobile-menu); /* <-- Erre cseréltük */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid var(--color-border); /* <-- Erre cseréltük */
+        padding: var(--space-4);
+        gap: var(--space-3);
+        box-shadow: var(--shadow);
+    }
+}
