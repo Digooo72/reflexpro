@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { loginUser } from "../services/authService";
 
 function LoginPage() {
@@ -28,7 +28,7 @@ function LoginPage() {
                 uid: user.uid
             }));
 
-            window.location.href = "/";
+            navigate("/");
         } catch (err) {
             setError("Hibás e-mail cím vagy jelszó!");
         } finally {
@@ -53,7 +53,10 @@ function LoginPage() {
                 </form>
 
                 <p style={{ marginTop: 'var(--space-4)', textAlign: 'center', color: 'var(--color-text-muted)' }}>
-                    Nincs még fiókod? <a href="/register" style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 'bold' }}>Regisztrálj!</a>
+                    Nincs még fiókod? 
+                    <Link to="/register" style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 'bold', marginLeft: '5px' }}>
+                        Regisztrálj!
+                    </Link>
                 </p>
             </section>
         </>
