@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../services/authService";
 
 function RegisterPage() {
@@ -60,7 +60,10 @@ function RegisterPage() {
                 </form>
 
                 <p style={{ marginTop: 'var(--space-4)', textAlign: 'center', color: 'var(--color-text-muted)' }}>
-                    Már van fiókod? <a href="/login" style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 'bold' }}>Lépj be!</a>
+                    Már van fiókod? 
+                    <Link to="/login" style={{ color: 'var(--color-primary)', textDecoration: 'none', fontWeight: 'bold', marginLeft: '5px' }}>
+                    Lépj be!
+                </Link>
                 </p>
             </section>
         </>
