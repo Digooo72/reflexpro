@@ -34,7 +34,7 @@ function RegisterPage() {
             }));
 
             // 3. Átirányítás a főoldalra
-            window.location.href = "/";
+            navigate("/");
         } catch (err) {
             setError("Sikertelen regisztráció! Lehet, hogy ez az e-mail már foglalt.");
         } finally {
